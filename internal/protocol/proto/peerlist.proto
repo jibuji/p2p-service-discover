@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package pb;
+
+option go_package = "github.com/jibuji/p2p-service-discover/internal/protocol/proto";
+
+service ServicePeer {
+  rpc FetchPeerList(PeerListRequest) returns (PeerListResponse);
+  rpc CheckService(ServiceCheckRequest) returns (ServiceCheckResponse);
+}
+
+message PeerListRequest {
+    string service_topic = 1;
+    int32 page = 2;
+    int32 page_size = 3;
+    bytes request_id = 4;
+}
+
+message PeerInfo {
+    bytes peer_id = 1;
+    repeated string addresses = 2;
+    int64 last_seen = 3;
+}
+
+message PeerListResponse {
+    string service_topic = 1;
+    int32 page = 2;
+    int32 total_pages = 3;
+    repeated PeerInfo peers = 4;
+    bytes request_id = 5;
+}
+
+message ServiceCheckRequest {
+    string service_topic = 1;
+    bytes request_id = 2;
+}
+
+message ServiceCheckResponse {
+    string service_topic = 1;
+    bool provides_service = 2;
+    bytes request_id = 3;
+} 
