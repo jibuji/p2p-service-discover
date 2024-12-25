@@ -5,12 +5,12 @@ go 1.22.0
 toolchain go1.22.9
 
 require (
-	github.com/jibuji/go-stream-rpc v0.1.6
+	github.com/jibuji/go-stream-rpc v0.1.7
 	github.com/libp2p/go-libp2p v0.38.1
 	github.com/libp2p/go-libp2p-kad-dht v0.28.1
 	github.com/libp2p/go-libp2p-pubsub v0.12.0
 	github.com/multiformats/go-multiaddr v0.14.0
-	google.golang.org/protobuf v1.36.0
+	google.golang.org/protobuf v1.36.1
 )
 
 require (

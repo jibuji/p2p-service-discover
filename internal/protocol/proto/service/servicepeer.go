@@ -61,3 +61,4 @@ func (s *ServicePeerService) convertPeers(peers []types.PeerInfo) []*proto.PeerI
 	}
 	return result
 }
+
