@@ -27,6 +27,7 @@ func NewNode() (host.Host, error) {
 		libp2p.Transport(tcp.NewTCPTransport),
 		libp2p.ListenAddrStrings("/ip4/0.0.0.0/tcp/0"),
 	)
+
 	if err != nil {
 		log.Fatalf("failed to create libp2p host: %v", err)
 	}

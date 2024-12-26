@@ -2,6 +2,7 @@ package discovery
 
 import (
 	"encoding/json"
+	"log"
 	"time"
 
 	pubsub "github.com/libp2p/go-libp2p-pubsub"
@@ -115,11 +116,20 @@ func (n *ServiceNode) pubsubDiscoveryLoop(serviceTopic string, topic *pubsub.Top
 				continue
 			}
 
+			// Query the peerstore for known addresses
+			addrs := n.host.Peerstore().Addrs(peerID)
+			if len(addrs) == 0 {
+				// Optionally, you can initiate a discovery mechanism or log the absence of addresses
+				log.Printf("No addresses found for peer %s", peerID)
+				continue
+			}
+			convertedAddrs := convertAddrs(addrs)
+
 			n.mu.Lock()
 			service := n.services[serviceTopic]
 			service.Peers[peerID] = types.PeerData{
 				LastSeen: ann.Timestamp,
-				Addrs:    []string{}, // Will be updated by DHT discovery
+				Addrs:    convertedAddrs,
 			}
 			n.mu.Unlock()
 		}
